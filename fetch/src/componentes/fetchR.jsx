@@ -13,7 +13,7 @@ function Pokemon(prop){
 
 export default class FetchR extends React.Component{
         state={
-            pokemons: []
+            pokemones: []
         }
 
     componentDidMount(){
@@ -25,8 +25,15 @@ export default class FetchR extends React.Component{
                         let pokemon={
                             name: el.name
                         }
-                        let pokemons= [...this.state.pokemons, pokemon]
-                        this.setState({ pokemons })
+                        
+                    // En la proxima linea de código en "pokemones" es un array donde guarda 
+                    // "this.state.pokemones" y agrega otro indice con el objeto "pokemon".
+                        let pokemones= [...this.state.pokemones, pokemon]
+                    // "this.setState()" re-escribe "this.state.pokemones" con "pokemones" 
+                    // de la linea anterior, y esto sucede cada vez que el objeto 
+                    // "json.results" es iterado.
+                    // Pero por alguna razon no funciona, solo guarda los dos últimos datos y lo hace 2 veces
+                        this.setState({ pokemones })
                     })
                 });
         }
@@ -35,9 +42,9 @@ export default class FetchR extends React.Component{
         return(
             <>
             <h1>React Fetch</h1>
-            {this.state.pokemons.length=== 0 
+            {this.state.pokemones.length=== 0 
             ?<h1>Cargando</h1> 
-            :this.state.pokemons.map((el, id)=>(
+            :this.state.pokemones.map((el, id)=>(
                 <Pokemon key={id} name= {el.name} avatar={el.avatar}/>
             ))}
             </>
